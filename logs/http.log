@@ -1,0 +1,2 @@
+::ffff:192.168.1.69 - - [25/Oct/2024:10:20:11 +0000] "GET /api/ HTTP/1.1" 200 221 "-" "PostmanRuntime/7.42.0"
+::1 - - [25/Oct/2024:10:22:49 +0000] "GET /api HTTP/1.1" 200 221 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
