@@ -10,11 +10,15 @@
   "author": "sandip",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
+    "csurf": "^1.11.0",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
     "express-validator": "^7.2.0",
     "fs": "^0.0.1-security",
     "helmet": "^8.0.0",
@@ -22,6 +26,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
     "nodemon": "^3.1.7",
     "winston": "^3.15.0"
   }

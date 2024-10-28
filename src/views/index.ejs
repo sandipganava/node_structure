@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js with EJS</title>
+    <script src="js/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.169.0/three.module.min.js"
+        integrity="sha512-fFc6JwwOG7dmtOGpA/X3+HGW1XdDp7818iuqwDEx14Imh4QSh7q91BPz4EdNeHR8lLDaMRYuSWqv7Ts2dbZa1Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body>
+    <h1>Hello, Three.js!</h1>
+    <div id="canvas-container"></div>
+
+    <script>
+        // Basic Three.js setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Create a simple cube
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+
+</html>

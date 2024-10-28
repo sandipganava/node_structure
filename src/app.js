@@ -7,6 +7,7 @@ const logger = require('./utils/logger');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const routes = require('./routes/user.routes'); // Import the routes
+const api = require('./routes/apiRoute.js'); // Import the api routes
 const errorHandler = require('./middleware/error.middleware.js'); // Custom error handler middleware
 const { connectDatabase } = require('./config/database.js'); // Database connection logic
 require('dotenv').config(); // Load .env variables
@@ -25,9 +26,15 @@ app.use(cors()); // Cross-Origin Resource Sharing
 app.use(morgan('combined', { stream: accessLogStream })); // HTTP request logger
 app.use(bodyParser.json()); // Parse incoming JSON requests
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded requests
+// set the view engine to ejs
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+console.log(__dirname, 'public')
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use('/api', routes); // Prefix all routes with /api
+app.use('/user', routes); // Prefix all routes with /api
+app.use('/api', api); // Prefix all routes with /api
 
 // Custom 404 Route for unmatched URLs
 app.use((req, res, next) => {
