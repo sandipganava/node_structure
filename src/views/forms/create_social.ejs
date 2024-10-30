@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- head start -->
+<%- include('../partials/_head.ejs') %>
+  <!-- head end -->
+
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_sidebar.html -->
+      <%- include('../partials/_sidebar.ejs') %>
+
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+          <!-- partial:../../partials/_navbar.html -->
+          <%- include('../partials/_navbar.ejs') %>
+
+
+            <!-- partial -->
+            <div class="main-panel">
+              <div class="content-wrapper">
+                <div class="page-header">
+                  <h3 class="page-title"> Create Social </h3>
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                    </ol>
+                  </nav>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                          <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" placeholder="Enter description" required></textarea>
+                          </div>
+                        
+                          <div class="form-group">
+                            <label>Technologies</label>
+                            <select class="js-example-basic-multiple" multiple="multiple" style="width:100%" name="technologies">
+                              <option value="JavaScript">JavaScript</option>
+                              <option value="Node.js">Node.js</option>
+                              <option value="React">React</option>
+                              <option value="Vue.js">Vue.js</option>
+                              <option value="Python">Python</option>
+                              <option value="Ruby">Ruby</option>
+                              <option value="Java">Java</option>
+                            </select>
+                          </div>
+                        
+                          <div class="form-group">
+                            <label for="category">Category</label>
+                            <input type="text" class="form-control" id="category" placeholder="Category" name="category" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="liveLink">Live Link</label>
+                            <input type="text" class="form-control" id="liveLink" placeholder="Live Link" name="liveLink" required>
+                          </div>
+                          <div class="form-group">
+                            <label>Image Upload</label>
+                            <input type="file" name="image" class="file-upload-default" required>
+                            <div class="input-group col-xs-12">
+                              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                              <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                              </span>
+                            </div>
+                          </div>
+                        
+                          <div class="form-group">
+                            <label for="githubLink">GitHub Link</label>
+                            <input type="text" class="form-control" id="githubLink" placeholder="GitHub Link" name="githubLink" required>
+                          </div>
+                        
+                          <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="isfeatured"> Is Featured
+                            </label>
+                          </div>
+                        
+                          <button type="submit" class="btn btn-primary me-2">Submit</button>
+                          <button type="button" class="btn btn-dark" onclick="window.history.back()">Cancel</button>
+                        </form>
+                        
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- content-wrapper ends -->
+              <!-- partial:../../partials/_footer.html -->
+
+              <%- include('../partials/_footer.ejs') %>
+
+
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="vendors/select2/select2.min.js"></script>
+    <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/misc.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="js/file-upload.js"></script>
+    <script src="js/typeahead.js"></script>
+    <script src="js/select2.js"></script>
+    <!-- End custom js for this page -->
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+    <script>
+      ClassicEditor
+        .create(document.querySelector('#description'))
+        .catch(error => {
+          console.error(error);
+        });
+    </script>
+
+  </body>
+
+</html>

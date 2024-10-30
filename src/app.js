@@ -13,6 +13,7 @@ const { connectDatabase } = require('./config/database.js'); // Database connect
 require('dotenv').config(); // Load .env variables
 const fs = require('fs');
 const path = require('path');
+const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3000; // Load the port from .env or use 3000 as default
@@ -20,20 +21,35 @@ const PORT = process.env.PORT || 3000; // Load the port from .env or use 3000 as
 // Create a write stream for logging HTTP requests to a file
 const accessLogStream = fs.createWriteStream(path.join(__dirname, '../logs', 'http.log'), { flags: 'a' });
 
+
+// Session configuration
+app.use(session({
+    secret: process.env.DEV_JWT_SECRET,  // You should use a secure and random key for production
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }  // Set secure to true in production with HTTPS
+}));
+
+
+
+
 // Middleware
 app.use(helmet()); // Security middleware
 app.use(cors()); // Cross-Origin Resource Sharing
 app.use(morgan('combined', { stream: accessLogStream })); // HTTP request logger
 app.use(bodyParser.json()); // Parse incoming JSON requests
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded requests
+// Add middleware to parse incoming requests
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // set the view engine to ejs
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-console.log(__dirname, 'public')
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 // Routes
-app.use('/user', routes); // Prefix all routes with /api
+app.use('/', routes); // Prefix all routes with /
 app.use('/api', api); // Prefix all routes with /api
 
 // Custom 404 Route for unmatched URLs
@@ -54,7 +70,7 @@ connectDatabase()
     .then(() => {
         // Start the server
         server.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
+            console.log(`Server is running on port http://localhost:${PORT}`);
         });
     })
     .catch((err) => {

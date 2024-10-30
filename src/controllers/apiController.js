@@ -12,64 +12,108 @@ const Testimonial = require('../models/testimonial.model');
 const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-apicontroller.getAllUsers = async (req, res) => {
+// apicontroller.getAllUsers = async (req, res) => {
+//   try {
+//     const users = await User.find();
+//     res.status(200).json(users);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// }
+
+// apicontroller.addUsers = async (req, res) => {
+//   const user = new User({
+//     fullname: req.body.fullname,
+//     username: req.body.username,
+//     email: req.body.email,
+//     password: req.body.password
+//   });
+
+//   try {
+//     const newUser = await user.save();
+//     res.status(201).json({ status: true, message: 'User added successfully!' });
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// }
+
+// apicontroller.getUser = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.id);
+//     res.status(200).json({ status: true, data: user });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// }
+
+// apicontroller.updateUser = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.id);
+//     user.fullname = req.body.fullname;
+//     user.username = req.body.username;
+//     user.email = req.body.email;
+//     user.password = req.body.password;
+//     const updatedUser = await user.save();
+//     res.status(200).json({ status: true, message: 'User updated successfully!', data: updatedUser });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// }
+
+// apicontroller.deleteUser = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.id);
+//     const deletedUser = await user.remove();
+//     res.status(200).json({ status: true, message: 'User deleted successfully!' });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// }
+
+apicontroller.adminLogin = async (req, res) => {
+  const { email, password } = req.body;
+  console.log(email, password)
   try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
+    // Step 1: Validate request data (email and password)
+    if (!email || !password) {
+      return res.status(400).json({ status: false, message: 'Email and password are required' });
+    }
 
-apicontroller.addUsers = async (req, res) => {
-  const user = new User({
-    fullname: req.body.fullname,
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  });
+    // Step 2: Check if the user exists in the database
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ status: false, message: 'User not found' });
+    }
 
-  try {
-    const newUser = await user.save();
-    res.status(201).json({ status: true, message: 'User added successfully!' });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-}
+    // Step 3: Compare the password with the stored hashed password
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res.status(401).json({ status: false, message: 'Invalid credentials' });
+    }
 
-apicontroller.getUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    res.status(200).json({ status: true, data: user });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
+    // Step 4: Generate JWT Token for the authenticated user
+    const token = jwt.sign(
+      { id: user._id, email: user.email, role: user.role },  // Payload
+      process.env.DEV_JWT_SECRET,  // Secret key
+      { expiresIn: '1h' }  // Token expiration (optional)
+    );
 
-apicontroller.updateUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    user.fullname = req.body.fullname;
-    user.username = req.body.username;
-    user.email = req.body.email;
-    user.password = req.body.password;
-    const updatedUser = await user.save();
-    res.status(200).json({ status: true, message: 'User updated successfully!', data: updatedUser });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
+    // Step 5: Return success response with token
+    res.status(200).json({
+      status: true,
+      message: 'User logged in successfully!',
+      token,  // Include the JWT token in the response
+    });
 
-apicontroller.deleteUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    const deletedUser = await user.remove();
-    res.status(200).json({ status: true, message: 'User deleted successfully!' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    // Catch any errors and return a 500 response
+    res.status(500).json({ status: false, message: error.message });
   }
-}
+};
 
 apicontroller.getAllProjects = async (req, res) => {
   try {

@@ -63,11 +63,12 @@ function checkKey() {
 
 
 // user Api
-router.get('/users', apiController.getAllUsers);
-router.post('/user', apiController.addUsers);
-router.get('/user/:id', apiController.getUser);
-router.put('/user/:id', apiController.updateUser);
-router.delete('/user/:id', apiController.deleteUser);
+router.post('/login', apiController.adminLogin);
+// router.get('/users', apiController.getAllUsers);
+// router.post('/user', apiController.addUsers);
+// router.get('/user/:id', apiController.getUser);
+// router.put('/user/:id', apiController.updateUser);
+// router.delete('/user/:id', apiController.deleteUser);
 
 // project api
 router.get('/projects', apiController.getAllProjects);

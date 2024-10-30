@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/_head.ejs') %>
+
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_sidebar.html -->
+      <%- include('../partials/_sidebar.ejs') %>
+
+
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+          <!-- partial:../../partials/_navbar.html -->
+          <%- include('../partials/_navbar.ejs') %>
+
+
+            <!-- partial -->
+            <div class="main-panel">
+              <div class="content-wrapper">
+                <div class="page-header">
+                  <h3 class="page-title"> Educations </h3>
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Educations</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Educations</li>
+                    </ol>
+                  </nav>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <h4 class="card-title">Educations</h4>
+                          <a class="nav-link btn btn-success create-new-button"  href="create_education">+ Create New Educations</a>
+                      </div>
+                      
+                        </p>
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th class="text-capitalize"> # </th>
+                                <th class="text-capitalize"> Logo </th>
+                                <th class="text-capitalize"> institution </th>
+                                <th class="text-capitalize"> degree </th>
+                                <th class="text-capitalize"> fieldOfStudy </th>
+                                <th class="text-capitalize"> startDate </th>
+                                <th class="text-capitalize"> endDate </th>
+                                <th class="text-capitalize"> activities </th>
+                                <th class="text-capitalize"> description </th>
+                                <th class="text-capitalize"> honors </th>
+                                <th class="text-capitalize"> location </th>
+                                <th class="text-capitalize"> Adction </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% for (let i=0; i < educations.length; i++) { %>
+                                <tr>
+                                  <td>
+                                    <%= i + 1 %>
+                                  </td>
+                                  <td>
+                                    <img src="https://dummyimage.com/svga" alt="" width="500" height="600">
+                                  </td>
+                                  <td>
+                                    <%= educations[i].institution %>
+                                  </td>
+                                  <td>
+                                    <%= educations[i].degree %>
+                                  </td>
+                                  <td>
+                                    <%= educations[i].fieldOfStudy %>
+                                  </td>
+                                  <td>
+                                    <%= educations[i].startDate %>
+                                  </td>
+                                  <td>
+                                    <%= educations[i].endDate %>
+                                  </td>
+                                  <td>
+                                    <%= educations[i].activities %>
+                                  </td>
+                                  <td>
+                                    <%= educations[i].description %>
+                                  </td>
+                                  <td>
+                                    <%= educations[i].honors %>
+                                  </td>
+                                  <td>
+                                    <%= educations[i].location %>
+                                  </td>
+                                  
+                                  <td><a href="/edit_education/<%= educations[i]._id %>"<i class="mdi mdi-pencil"></i></a> <a href=""><i
+                                        class="mdi mdi-delete"></i></a></td>
+
+                                </tr>
+                                <% } %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- content-wrapper ends -->
+              <!-- partial:../../partials/_footer.html -->
+              <%- include('../partials/_footer.ejs') %>
+
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/misc.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <!-- End custom js for this page -->
+  </body>
+
+</html>
