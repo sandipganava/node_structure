@@ -14283,3 +14283,5 @@
 ::1 - - [30/Oct/2024:10:20:06 +0000] "GET /project HTTP/1.1" 401 35 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
 ::1 - - [30/Oct/2024:10:20:06 +0000] "GET /login HTTP/1.1" 200 815 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
 ::1 - - [30/Oct/2024:10:20:06 +0000] "GET /css/login.css HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+::1 - - [30/Oct/2024:12:07:38 +0000] "GET /login HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+::1 - - [30/Oct/2024:12:07:38 +0000] "GET /css/login.css HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
